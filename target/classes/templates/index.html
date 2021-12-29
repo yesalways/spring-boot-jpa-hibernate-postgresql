@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Manager</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <style>
+
+    </style>
+</head>
+<body>
+<div align="center">
+    <h1>Product List</h1>
+    <a href="/new">Create New Product</a>
+    </br> </br>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Made In</th>
+                <th>Price</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${listProducts2}">
+            <td th:text="${product.id}" class="center"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.brand}" class="center"></td>
+            <td th:text="${product.madeiin}" class="center"></td>
+            <td th:text="${product.price}"></td>
+            <td><button><a class="edit" th:href="@{edit/{id}(id=${product.id})}">Edit</a> </button></td>
+            <td><button><a class="delete confirmation" th:href="@{delete/{id}(id=${product.id})}">Delete</a></button></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="form-group col-md-8">
+        <label  class="col-form-label">Category </label>
+        <select id="prd">
+            <option th:each="product : ${listProducts}" th:value="${product.id}" th:text="${product.name}"/>
+        </select>
+    </div>
+
+</div>
+
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+    $('.confirmation').on('click', function () {
+        return confirm('Are you sure? Want you to Delete the record...');
+    });
+</script>
